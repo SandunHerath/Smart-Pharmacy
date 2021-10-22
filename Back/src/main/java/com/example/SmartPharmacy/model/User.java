@@ -18,6 +18,6 @@ public class User {
     private String name;
     private String username;
     private String password;
-//    @ManyToMany(fetch = EAGER)
-//    private Collection<Role> roles=new ArrayList<>();
+    @ManyToMany(fetch = EAGER)
+    private Collection<Role> roles=new ArrayList<>();
 }
