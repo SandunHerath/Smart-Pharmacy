@@ -1,10 +1,10 @@
-package com.example.SmartPharmacy;
+package com.example.SmartMedicalCenter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SmartPharmacyApplicationTests {
+class SmartMedicalCenterApplicationTests {
 
 	@Test
 	void contextLoads() {

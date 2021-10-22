@@ -1,4 +1,4 @@
-package com.example.SmartPharmacy.model;
+package com.example.SmartMedicalCenter.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,13 +14,11 @@ import static javax.persistence.GenerationType.AUTO;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Products {
+public class User {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
     private String name;
-    private String image;
-    private String category;
-    private Double price;
-    private String description;
+    private String username;
+    private String password;
 }

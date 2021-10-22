@@ -9,12 +9,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Smart-Pharmacy</artifactId>
+	<artifactId>Smart-Medical-Center</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Smart-Pharmacy</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Smart-Medical-Center</name>
+	<description>Smart-Medical-Center project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
