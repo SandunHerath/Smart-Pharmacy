@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
-const MedicineEditScreen = ({ match, history }) => {
+const MedicineAddScreen = ({ match, history }) => {
   const productId = match.params.id;
 
   const [name, setName] = useState("");
@@ -17,18 +17,6 @@ const MedicineEditScreen = ({ match, history }) => {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
 
-  const getData = async () => {
-    const { data } = await axios.get(`/api/medicine/${match.params.id}`);
-    setName(data.name);
-    setPrice(data.price);
-    setImage(data.image);
-    setCategory(data.category);
-    setDescription(data.description);
-    console.log(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -150,4 +138,4 @@ const MedicineEditScreen = ({ match, history }) => {
   );
 };
 
-export default MedicineEditScreen;
+export default MedicineAddScreen;

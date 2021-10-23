@@ -1,16 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useParams } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
 
 const ProductScreen = ({ history, match }) => {
-  useEffect(() => {}, []);
+  const [product, setProduct] = useState({});
+  const getData = async () => {
+    const { data } = await axios.get(`/api/medicine/${match.params.id}`);
+    console.log(data);
+    setProduct(data);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
 
-  const product = {};
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
+      <Link className="btn btn-light my-3" to="/medicine/home">
         Go Back
       </Link>
 

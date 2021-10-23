@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
-const DoctorEditScreen = ({ match, history }) => {
+const NewDoctorScreen = ({ match, history }) => {
   const productId = match.params.id;
 
   const [name, setName] = useState("");
@@ -16,19 +16,6 @@ const DoctorEditScreen = ({ match, history }) => {
   const [hospital, setHospital] = useState("");
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
-
-  const getData = async () => {
-    const { data } = await axios.get(`/api/doctor/${match.params.id}`);
-    setName(data.name);
-    setGender(data.gender);
-    setImage(data.image);
-    setCategory(data.category);
-    setHospital(data.hospital);
-    console.log(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -45,14 +32,10 @@ const DoctorEditScreen = ({ match, history }) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/doctor/update/${match.params.id}`,
-      doctor,
-      config
-    );
+    const { data } = await axios.post(`/api/doctor/add`, doctor, config);
     if (data != null) {
-      alert("successfully updated !");
-      history.push("/doctor/" + match.params.id);
+      alert("successfully Added!");
+      history.push("/doctors");
     }
     console.log(data);
   };
@@ -147,7 +130,7 @@ const DoctorEditScreen = ({ match, history }) => {
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            Update
+            Add
           </Button>
         </Form>
       </FormContainer>
@@ -155,4 +138,4 @@ const DoctorEditScreen = ({ match, history }) => {
   );
 };
 
-export default DoctorEditScreen;
+export default NewDoctorScreen;

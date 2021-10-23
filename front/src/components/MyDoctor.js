@@ -6,12 +6,12 @@ import Rating from "./Rating";
 const Medicine = ({ product }) => {
   return (
     <Card className="my-3 p-3 rounded">
-      <Link to={`/medicine/${product.id}`}>
+      <Link to={`/doctor/${product.id}`}>
         <Card.Img src={product.image} variant="top" />
       </Link>
 
       <Card.Body>
-        <Link to={`/medicine/${product.id}`}>
+        <Link to={`/doctor/${product.id}`}>
           <Card.Title as="div">
             <strong>{product.name}</strong>
           </Card.Title>
@@ -25,7 +25,8 @@ const Medicine = ({ product }) => {
           />
         </Card.Text>
 
-        <Card.Text as="h3">${product.price}</Card.Text>
+        <Card.Text as="h5">Hospital :{product.hospital}</Card.Text>
+        <Card.Text as="h5">Gender:{product.gender}</Card.Text>
       </Card.Body>
     </Card>
   );

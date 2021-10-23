@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
@@ -20,6 +20,7 @@ const RegisterScreen = ({ location, history }) => {
         },
       };
       const username = email;
+      console.log(name, username, password);
       const res = await axios.post(
         "/api/user/register",
         { name, username, password },

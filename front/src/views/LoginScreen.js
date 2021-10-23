@@ -1,16 +1,25 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-
+import axios from "axios";
 import FormContainer from "../components/FormContainer";
-
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const submitHandler = (e) => {
+
+  const submitHandler = async (e) => {
     e.preventDefault();
+    const username = email;
+    const config = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      params: { username, password },
+    };
+
+    const { data } = await axios.post("/api/login", null, config);
+    console.log(data);
   };
 
   return (
@@ -44,10 +53,7 @@ const LoginScreen = ({ location, history }) => {
 
       <Row className="py-3">
         <Col>
-          New Customer?{" "}
-          <Link to="register">
-            Register
-          </Link>
+          New Customer? <Link to="register">Register</Link>
         </Col>
       </Row>
     </FormContainer>
