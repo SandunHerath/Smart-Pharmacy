@@ -28,7 +28,7 @@ public class DoctorResource {
     }
     @PostMapping("/add")
     public ResponseEntity<Doctor>saveProduct(@RequestBody Doctor doctor)  {
-        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/products/add").toUriString());
+        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/doctor/add").toUriString());
         return ResponseEntity.created(uri).body(doctorService.SaveDoctor(doctor));
     }
     @PostMapping("/img/{id}")
