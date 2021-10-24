@@ -1,43 +1,30 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
-const MedicineEditScreen = ({ match, history }) => {
+const NewDoctorScreen = ({ match, history }) => {
   const productId = match.params.id;
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [gender, setGender] = useState(0);
   const [image, setImage] = useState(null);
 
   const [category, setCategory] = useState("");
 
-  const [description, setDescription] = useState("");
+  const [hospital, setHospital] = useState("");
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
 
-  const getData = async () => {
-    const { data } = await axios.get(`/api/medicine/${match.params.id}`);
-    setName(data.name);
-    setPrice(data.price);
-    setImage(data.image);
-    setCategory(data.category);
-    setDescription(data.description);
-    console.log(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
   const submitHandler = async (e) => {
     e.preventDefault();
-    const medicine = {
+    const doctor = {
       name: name,
-      price: price,
-      image: image,
+      gender: gender,
+      image: null,
       category: category,
-      description: description,
+      hospital: hospital,
     };
     const config = {
       headers: {
@@ -45,19 +32,14 @@ const MedicineEditScreen = ({ match, history }) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/medicine/update/${match.params.id}`,
-      medicine,
-      config
-    );
+    const { data } = await axios.post(`/api/doctor/add`, doctor, config);
     if (data != null) {
-      console.log(data);
-      alert("successfully updated !");
-      history.push("/medicine/" + match.params.id);
+      alert("successfully Added!");
+      history.push("/doctors");
     }
+    console.log(data);
   };
 
-  //image uploads
   const changeHandler = (event) => {
     setSelectedFile(event.target.files);
     setIsFilePicked(true);
@@ -86,11 +68,11 @@ const MedicineEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to="/medicine/home" className="btn btn-light my-3">
+      <Link to="/doctors" className="btn btn-light my-3">
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit Medicine</h1>
+        <h1>Edit Doctor Details</h1>
 
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
@@ -104,12 +86,12 @@ const MedicineEditScreen = ({ match, history }) => {
           </Form.Group>
 
           <Form.Group controlId="price">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Gender</Form.Label>
             <Form.Control
-              type="number"
-              placeholder="Enter price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              type="name"
+              placeholder="Enter Gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
@@ -138,17 +120,17 @@ const MedicineEditScreen = ({ match, history }) => {
           </Form.Group>
 
           <Form.Group controlId="description">
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Hospital</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter hospital"
+              value={hospital}
+              onChange={(e) => setHospital(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            Update
+            Add
           </Button>
         </Form>
       </FormContainer>
@@ -156,4 +138,4 @@ const MedicineEditScreen = ({ match, history }) => {
   );
 };
 
-export default MedicineEditScreen;
+export default NewDoctorScreen;

@@ -14,8 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
 @RestController
-@RequestMapping("/api/medicine")
+@RequestMapping("/api/medicine/")
 @RequiredArgsConstructor
 public class MedicineResource {
     private final MedicineService medicineService;
@@ -27,7 +28,7 @@ public class MedicineResource {
     }
     @PostMapping("/add")
     public ResponseEntity<Medicine>saveProduct(@RequestBody Medicine medicine)  {
-        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/products/add").toUriString());
+        URI uri= URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/medicine/add").toUriString());
         return ResponseEntity.created(uri).body(medicineService.SaveMedicine(medicine));
     }
     @PostMapping("/img/{id}")
@@ -41,7 +42,7 @@ public class MedicineResource {
         return ResponseEntity.ok().body(medicineService.updateMedicineImage(path,id));
     }
     @GetMapping("{id}")
-    public ResponseEntity<Medicine>getSingleProduct(@PathVariable("id")Long id){
+    public ResponseEntity<Medicine> getSingleMedicine(@PathVariable("id")Long id){
         return ResponseEntity.ok().body(medicineService.getSingleMedicine(id));
     }
     @PutMapping("update/{id}")

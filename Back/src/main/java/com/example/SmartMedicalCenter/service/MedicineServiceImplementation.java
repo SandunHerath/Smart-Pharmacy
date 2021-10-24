@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,18 @@ public class MedicineServiceImplementation implements MedicineService{
     @Override
     public Medicine getSingleMedicine(Long id) {
         log.info("Fetching product {}",id);
-        return medicineRepository.findById(id).get();
+        System.out.println("_________________________________");
+        Optional<Medicine> m = medicineRepository.findById(id);
+            System.out.println(m);
+
+        if(m.isPresent()){
+            Medicine newMedicine = m.get();
+            return newMedicine;
+        }else{
+            System.out.println("_________________________________");
+            return null;
+        }
+
     }
 
     @Override

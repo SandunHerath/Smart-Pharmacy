@@ -7,7 +7,7 @@ function AppFooter() {
     <div className="container-fluid">
       <div className="footer">
         <div className="logo">
-          <i className="fas fa-bolt"></i>
+          <i class="fas fa-clinic-medical"></i>
           <a href="http://google.com">Smart-Medical-Center</a>
         </div>
         <ul className="socials">

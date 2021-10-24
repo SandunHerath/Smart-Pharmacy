@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
-const MedicineEditScreen = ({ match, history }) => {
+const MedicineAddScreen = ({ match, history }) => {
   const productId = match.params.id;
 
   const [name, setName] = useState("");
@@ -16,19 +16,6 @@ const MedicineEditScreen = ({ match, history }) => {
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
-
-  const getData = async () => {
-    const { data } = await axios.get(`/api/medicine/${match.params.id}`);
-    setName(data.name);
-    setPrice(data.price);
-    setImage(data.image);
-    setCategory(data.category);
-    setDescription(data.description);
-    console.log(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -45,15 +32,11 @@ const MedicineEditScreen = ({ match, history }) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/medicine/update/${match.params.id}`,
-      medicine,
-      config
-    );
+    const { data } = await axios.post(`/api/medicine/add`, medicine, config);
     if (data != null) {
       console.log(data);
-      alert("successfully updated !");
-      history.push("/medicine/" + match.params.id);
+      alert("successfully Added !");
+      history.push("/medicine/home");
     }
   };
 
@@ -90,7 +73,7 @@ const MedicineEditScreen = ({ match, history }) => {
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit Medicine</h1>
+        <h1>Add new Medicine</h1>
 
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
@@ -148,7 +131,7 @@ const MedicineEditScreen = ({ match, history }) => {
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            Update
+            Add
           </Button>
         </Form>
       </FormContainer>
@@ -156,4 +139,4 @@ const MedicineEditScreen = ({ match, history }) => {
   );
 };
 
-export default MedicineEditScreen;
+export default MedicineAddScreen;
