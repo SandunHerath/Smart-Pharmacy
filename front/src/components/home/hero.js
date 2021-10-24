@@ -32,7 +32,11 @@ function AppHero() {
           return (
             <div key={item.key} className="container-fluid">
               <div className="content">
-                <h3>{item.title}</h3>
+                <h3>
+                  {item.title}
+                  <i class="fas fa-clinic-medical"></i>
+                </h3>
+
                 <p>{item.content}</p>
                 <div className="btnHolder">
                   <Link to="/register">

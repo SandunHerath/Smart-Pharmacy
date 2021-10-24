@@ -24,6 +24,7 @@ public class UserResource {
 
     @PostMapping("/user/register")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
+        System.out.println(user);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/register").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }

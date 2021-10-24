@@ -13,6 +13,7 @@ import Doctor from "./views/Doctor";
 import DoctorsScreen from "./views/DoctorHome";
 import DoctorEdit from "./views/DoctorEdit";
 import DoctorAdd from "./views/NewDoctor";
+import Main from "./views/Main";
 function App() {
   return (
     <BrowserRouter>
@@ -20,12 +21,12 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/medicine/home">
-          <MedicineHome />
-        </Route>
+        <Route exact path="/main" component={Main}/>
+        <Route exact path="/medicine/home" component={MedicineHome} />
+        <Route exact path="/medicine/add" component={MedicinesAdd} />
         <Route exact path="/medicine/:id" component={Medicines} />
         <Route exact path="/medicine/edit/:id" component={MedicineEdit} />
-        <Route exact path="/medicine/add" component={MedicinesAdd} />
+
         <Route exact path="/doctor/add" component={DoctorAdd} />
         <Route exact path="/doctor/:id" component={Doctor} />
         <Route exact path="/doctor/edit/:id" component={DoctorEdit} />

@@ -35,7 +35,7 @@ const MedicineEditScreen = ({ match, history }) => {
     const medicine = {
       name: name,
       price: price,
-      image: null,
+      image: image,
       category: category,
       description: description,
     };
@@ -50,9 +50,14 @@ const MedicineEditScreen = ({ match, history }) => {
       medicine,
       config
     );
-    console.log(data);
+    if (data != null) {
+      console.log(data);
+      alert("successfully updated !");
+      history.push("/medicine/" + match.params.id);
+    }
   };
 
+  //image uploads
   const changeHandler = (event) => {
     setSelectedFile(event.target.files);
     setIsFilePicked(true);
@@ -86,66 +91,67 @@ const MedicineEditScreen = ({ match, history }) => {
       </Link>
       <FormContainer>
         <h1>Edit Medicine</h1>
+
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId="name">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Enter name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="price">
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="image">
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter image url"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            ></Form.Control>
+            <input type="file" name="file" onChange={changeHandler} />
+            <div>
+              <button onClick={handleSubmission}>Submit</button>
+            </div>
+          </Form.Group>
+
+          <Form.Group controlId="category">
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="description">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Button type="submit" variant="primary">
+            Update
+          </Button>
+        </Form>
       </FormContainer>
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="name"
-            placeholder="Enter name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="price">
-          <Form.Label>Price</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Enter price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="image">
-          <Form.Label>Image</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter image url"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          ></Form.Control>
-          <input type="file" name="file" onChange={changeHandler} />
-          <div>
-            <button onClick={handleSubmission}>Submit</button>
-          </div>
-        </Form.Group>
-
-        <Form.Group controlId="category">
-          <Form.Label>Category</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Button type="submit" variant="primary">
-          Update
-        </Button>
-      </Form>
     </>
   );
 };

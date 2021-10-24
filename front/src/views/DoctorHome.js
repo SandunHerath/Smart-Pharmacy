@@ -16,7 +16,7 @@ const DoctorsScreen = ({ history }) => {
   };
   return (
     <>
-      <h1>Latest Products</h1>
+      <h1>Best Doctors</h1>
       <Button onClick={addNewHandler} className="btn-block" type="button">
         Add New Doctor
       </Button>

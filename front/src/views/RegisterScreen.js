@@ -27,7 +27,7 @@ const RegisterScreen = ({ location, history }) => {
         config
       );
       if (res != null) {
-        history.push("/medicine/home");
+        history.push("/main");
       }
     }
   };

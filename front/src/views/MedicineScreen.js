@@ -14,7 +14,18 @@ const ProductScreen = ({ history, match }) => {
   useEffect(() => {
     getData();
   }, []);
+  const updateHandler = async (e) => {
+    history.push("/medicine/edit/" + match.params.id);
+  };
 
+  const deleteHandler = async (e) => {
+    const { data } = await axios.delete(`/api/medicine/${match.params.id}`);
+    console.log(data);
+    if (data != null) {
+      alert("successfully deleted !");
+    }
+    history.push("/medicine/home");
+  };
   return (
     <>
       <Link className="btn btn-light my-3" to="/medicine/home">
@@ -31,47 +42,17 @@ const ProductScreen = ({ history, match }) => {
               <h3>{product.name}</h3>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-              />
+              <Rating value={product.rating} text={` reviews`} />
             </ListGroup.Item>
-            <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+            <ListGroup.Item>Price: {product.price}</ListGroup.Item>
             <ListGroup.Item>Description: {product.description}</ListGroup.Item>
           </ListGroup>
-        </Col>
-        <Col md={3}>
-          <Card>
-            <ListGroup variant="flush">
-              <ListGroup.Item>
-                <Row>
-                  <Col>Price:</Col>
-                  <Col>
-                    <strong>${product.price}</strong>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                <Row>
-                  <Col>Status:</Col>
-                  <Col>
-                    {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Button
-                  // onClick={addToCartHandler}
-                  className="btn-block"
-                  type="button"
-                  disabled={product.countInStock === 0}
-                >
-                  Add To Cart
-                </Button>
-              </ListGroup.Item>
-            </ListGroup>
-          </Card>
+          <Button onClick={updateHandler} className="btn-block" type="button">
+            Update
+          </Button>
+          <Button onClick={deleteHandler} className="btn-block" type="button">
+            Delete
+          </Button>
         </Col>
       </Row>
     </>
